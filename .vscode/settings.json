@@ -8,8 +8,15 @@
         "string_view": "cpp",
         "system_error": "cpp",
         "*.tcc": "cpp",
-        "unordered_map": "cpp",
         "functional": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "fstream": "cpp",
+        "bitset": "cpp",
+        "iosfwd": "cpp",
+        "array": "cpp",
+        "initializer_list": "cpp",
+        "cmath": "cpp",
+        "istream": "cpp",
+        "tuple": "cpp"
     }
 }

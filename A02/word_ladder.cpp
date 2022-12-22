@@ -1,26 +1,20 @@
-// build graph of word ladder and find shortest path
-// use hash table to store words
-// use breadth first search to find shortest path
-// use crc32 hash function to hash words
-// use connected function to check if two words are connected
-// use print_word_ladder function to print word ladder
-
 #include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <map>
 #include <string>
+#include <cmath>
 #include <vector>
 #include <queue>
 #include <stack>
+#include <thread>
 
 using namespace std;
-using word_map = std::map<size_t, std::vector<std::string>>;
+#define _max_word_size_ 32
 
 class node
 {
 public:
-    node(const string &word) : word(word)
+    node(const wstring &word) : word(word)
     {
         parent = nullptr;
         visited = false;
@@ -28,7 +22,7 @@ public:
         vertices = 1;
         edges = 0;
     }
-    string word;
+    wstring word;
     // BFS relevant data
     node *parent;
     bool visited;
@@ -49,7 +43,8 @@ public:
     int connected_components;
     hashTable()
     {
-        size = 1048576;
+        // Makes the dict only need to be resized once.
+        size = 65536;
         words = new node *[size];
         entries = 0;
         connected_components = 0;
@@ -68,7 +63,7 @@ public:
             }
         }
     }
-    void add(const string &word)
+    void add(const wstring &word)
     {
         unsigned int index = hash(word);
         if (words[index] != nullptr && words[index]->word == word)
@@ -87,19 +82,15 @@ public:
         {
             while (words[index] != nullptr && words[index]->word != word)
             {
-                if (index + 1 >= size)
-                {
-                    index = 0;
-                }
-                else
-                {
-                    index++;
-                }
+                // Linear probing is the fastest way.
+                // Probably because it uses the cache more efficiently.
+                // And that matters the most when the table is huge and we have memory to spare.
+                index = (index + 1) % size;
             }
             create(index, word);
         }
     }
-    node *get(const string &word)
+    node *get(const wstring &word)
     {
         unsigned int index = hash(word);
         if (words[index] == nullptr)
@@ -112,14 +103,7 @@ public:
         }
         while (words[index] != nullptr && words[index]->word != word)
         {
-            if (index + 1 >= size)
-            {
-                index = 0;
-            }
-            else
-            {
-                index++;
-            }
+            index = (index + 1) % size;
         }
         return words[index];
     }
@@ -176,7 +160,7 @@ public:
         }
         return -1;
     }
-    int DFS(node *from, node *to, int maximum_depth)
+    int DFS(node *from, node *to, int maximum_depth = 0)
     {
         for (unsigned int i = 0; i < size; i++)
         {
@@ -220,13 +204,14 @@ public:
         }
         return -1;
     }
-    vector<node *> list_connected_components(const string &word)
+    void list_connected_components(const wstring &word)
     {
         vector<node *> components;
         node *vertex = get(word);
         if (vertex == nullptr)
         {
-            return components;
+            cout << "Word not found" << endl;
+            return;
         }
         node *representative = find(vertex);
         for (unsigned int i = 0; i < size; i++)
@@ -236,20 +221,99 @@ public:
                 components.push_back(words[i]);
             }
         }
-        return components;
+        wcout << "Belonging to same connected component as " << word << "are:" << endl;
+        for (size_t i = 0; i < components.size(); i++)
+        {
+            wcout << components[i]->word << "\n";
+        }
     }
     // hash table statistics
-    int get_size()
-    {
-        return size;
-    }
     double get_load_factor()
     {
         return (double)entries / size;
     }
+    int get_collisions()
+    {
+        unsigned int collisions = 0;
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr)
+            {
+                if (hash(words[i]->word) != i)
+                {
+                    collisions++;
+                }
+            }
+        }
+        return collisions;
+    }
+    vector<bool> get_distribution()
+    {
+        vector<bool> distribution;
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr)
+            {
+                distribution.push_back(true);
+            }
+            else
+            {
+                distribution.push_back(false);
+            }
+        }
+        return distribution;
+    }
+    // graph statistics
+    int get_connected_components()
+    {
+        int components = 0;
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr)
+            {
+                if (words[i]->representative == words[i])
+                {
+                    components++;
+                }
+            }
+        }
+        return components;
+    }
+    int get_diameter(node *n)
+    {
+        int diameter = 0;
+        node *max = nullptr;
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr)
+            {
+                int distance = BFS(words[i], n);
+                if (distance > diameter)
+                {
+                    diameter = distance;
+                    max = words[i];
+                }
+            }
+        }
+        // BFS data is wiped out every run.
+        BFS(n, max);
+        node *res = max;
+        if (res == nullptr)
+        {
+            wcout << "No connected words." << endl;
+            return 0;
+        }
+        while (res->parent != nullptr)
+        {
+            wcout << res->word << " -> ";
+            res = res->parent;
+        }
+        wcout << res->word << endl;
+        return diameter;
+    }
 
 private:
-    void create(int index, const string &word)
+    void create(int index, const wstring &word)
     {
         entries++;
         connected_components++;
@@ -257,15 +321,31 @@ private:
     }
     void resize()
     {
-        size *= 2;
+        // High resize coefficient to reduce resizes, which are expensive.
+        int coeff = 4;
+        size *= coeff;
         node **new_words = new node *[size];
-        for (unsigned int i = 0; i < size / 2; i++)
-        {
-            new_words[i] = words[i];
-        }
-        for (unsigned int i = size / 2; i < size; i++)
+        for (unsigned int i = 0; i < size; i++)
         {
             new_words[i] = nullptr;
+        }
+        for (unsigned int i = 0; i < size / coeff; i++)
+        {
+            if (words[i] != nullptr)
+            {
+                int index = hash(words[i]->word);
+                if (new_words[index] == nullptr)
+                {
+                    new_words[index] = words[i];
+                }
+                else
+                {
+                    while (new_words[index] != nullptr)
+                    {
+                        index = (index + 1) % size;
+                    }
+                }
+            }
         }
         delete[] words;
         words = new_words;
@@ -293,25 +373,23 @@ private:
 
     void print_adjacency_list(node *n)
     {
-        cout << n->word << " -> ";
+        wcout << n->word << " -> ";
         for (size_t i = 0; i < n->adjacency_list.size(); i++)
         {
-            cout << n->adjacency_list[i]->word << " ";
+            wcout << n->adjacency_list[i]->word << " ";
         }
-        cout << endl;
+        wcout << endl;
     }
 
 #define FNV_OFFSET 14695981039346656037UL
 #define FNV_PRIME 1099511628211UL
-    // crc32 gives poor results, so use FNV-1a instead:
-    // CRC32 results in 5353 collisions for 16384 words.
     // Return 64-bit FNV-1a hash for key (NUL-terminated). See description:
     // https://en.wikipedia.org/wiki/Fowler–Noll–Vo_hash_function
-    unsigned int hash(const string &word)
+    unsigned int hash(const wstring &word)
     {
         uint64_t hash = FNV_OFFSET;
-        const char *key = word.c_str();
-        for (const char *p = key; *p; p++)
+        const wchar_t *key = word.c_str();
+        for (const wchar_t *p = key; *p; p++)
         {
             hash ^= (uint64_t)(unsigned char)(*p);
             hash *= FNV_PRIME;
@@ -319,37 +397,41 @@ private:
         // Ensure hash is adjusted to the size of the table.
         return (size_t)(hash & (uint64_t)(size - 1));
     }
-    // {
-    //     static unsigned int table[256];
-    //     unsigned int crc;
-    //     if (table[1] == 0u)
-    //     {
-    //         unsigned int i, j;
-    //         for (i = 0u; i < 256u; i++)
-    //         {
-    //             for (table[i] = i, j = 0u; j < 8u; j++)
-    //             {
-    //                 if (table[i] & 1u)
-    //                 {
-    //                     table[i] = (table[i] >> 1) ^ 0xAED00022u; // "magic" constant
-    //                 }
-    //                 else
-    //                 {
-    //                     table[i] >>= 1;
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     crc = 0xAED00022u; // "magic" constant
-    //     for (unsigned int i = 0; i < word.size(); i++)
-    //     {
-    //         crc = (crc >> 8) ^ table[crc & 0xFFu] ^ ((unsigned int)word[i] << 24);
-    //     }
-    //     return crc % size;
-    // }
+    // https://github.com/skeeto/hash-prospector#three-round-functions
+    // Kept for reference.
+    unsigned int hash(int x)
+    {
+        x ^= x >> 17;
+        x *= 0xed5ad4bb;
+        x ^= x >> 11;
+        x *= 0xac4c1b51;
+        x ^= x >> 15;
+        x *= 0x31848bab;
+        x ^= x >> 14;
+        return x;
+    }
+
+    unsigned int unhash(int x)
+    {
+        x ^= x >> 14 ^ x >> 28;
+        x *= 0x32b21703;
+        x ^= x >> 15 ^ x >> 30;
+        x *= 0x469e0db1;
+        x ^= x >> 11 ^ x >> 22;
+        x *= 0x79a85073;
+        x ^= x >> 17;
+        return x;
+    }
 };
 
-bool connected(const string &a, const string &b)
+int diameter(hashTable **dicts, const wstring &word)
+{
+    hashTable *dict = dicts[word.size() - 1];
+    node *n = dict->get(word);
+    return dict->get_diameter(n);
+}
+
+bool connected(const wstring &a, const wstring &b)
 {
     if (a.size() != b.size())
         return false;
@@ -367,61 +449,78 @@ bool connected(const string &a, const string &b)
     return result;
 }
 
-void print_stats(hashTable *dict, const string &start, const string &end)
+void path_finder(hashTable **dicts, const wstring &start, const wstring &end)
 {
-    cout << "Trying to go from " << start << " to " << end << endl;
-    node *from = dict->get(start);
-    node *to = dict->get(end);
-    if (from == nullptr || to == nullptr)
+    if (start.size() != end.size())
     {
-        cout << "No path found." << endl;
+        cout << "Cannot compare different sizes." << endl;
         return;
     }
-    int travelled = dict->BFS(from, to, 0);
+    hashTable *dict = dicts[start.size() - 1];
+    wcout << "Trying to go from " << start << " to " << end << endl;
+    node *from = dict->get(end);
+    node *to = dict->get(start);
+    if (from == nullptr || to == nullptr)
+    {
+        wcout << "No path found." << endl;
+        return;
+    }
+    int travelled = dict->BFS(from, to);
     cout << "Travelled " << travelled << " nodes. " << endl;
     node *res = to;
     while (res->parent != nullptr)
     {
-        cout << res->word << " -> ";
+        wcout << res->word << " -> ";
         res = res->parent;
     }
-    cout << res->word << endl;
-    cout << "Same connected component vertices to " << start << endl;
-    vector<node *> conn_compon = dict->list_connected_components(start);
-    for (size_t i = 0; i < conn_compon.size(); i++)
-    {
-        cout << conn_compon[i]->word << " ";
-    }
-}
-void end(hashTable *dict)
-{
-    cout << endl;
-    cout << "Work done." << endl;
-    cout << "Size: " << dict->get_size() << endl;
-    cout << "Load factor: " << dict->get_load_factor() << endl;
-    cout << "Collisions: " << 0 << endl;
-    delete dict;
-    exit(0);
+    wcout << res->word << endl;
 }
 
-int main()
+void connected_components(hashTable **dicts, const wstring &word)
 {
-    hashTable *dict = new hashTable;
-    std::ifstream in("wordlist-four-letters.txt");
-    if (!in)
+    hashTable *dict = dicts[word.size() - 1];
+    dict->list_connected_components(word);
+}
+
+void end(hashTable **dicts)
+{
+    ofstream file;
+    file.open("stats.txt");
+    for (size_t i = 0; i < _max_word_size_; i++)
     {
-        printf("Error: could not open words file\n");
+#if defined(_stats_) || defined(_detail_)
+        file << endl;
+        file << "Hash Table for " << i + 1 << " letter words" << endl;
+        file << "Size: " << dicts[i]->size << endl;
+        file << "Load factor: " << dicts[i]->get_load_factor() << endl;
+        file << "Collisions: " << dicts[i]->get_collisions() << endl;
+#if defined(_detail_)
+        vector<bool> distribution = dicts[i]->get_distribution();
+        file << "Distribution: " << endl;
+        for (size_t j = 0; j < distribution.size(); j++)
+        {
+            if (distribution[j])
+                file << j << " ";
+        }
+        file << endl;
+#endif
+#endif
+        delete dicts[i];
     }
-    std::string word;
-    while (in >> word)
-    {
-        dict->add(word);
-    }
+    file.close();
+}
+
+void graph_builder(hashTable *dict)
+{
+    int sizes = 0;
+    // TODO: Optimize this, O(n^1.5) ish isn't good
     for (size_t i = 0; i < dict->size; i++)
     {
         node *from = dict->words[i];
         if (from == nullptr)
             continue;
+        if (sizes == 0)
+            sizes = from->word.size();
         for (size_t j = i + 1; j < dict->size; j++)
         {
             node *to = dict->words[j];
@@ -433,63 +532,60 @@ int main()
             }
         }
     }
-    print_stats(dict, "voguem", "vieres");
-    print_stats(dict, "vibrar", "venosa");
-    print_stats(dict, "vara", "umas");
-    end(dict);
+    if (sizes != 0)
+        cout << "Processed " << sizes + 1 << " letter words" << endl;
 }
 
-// // If possible, print the shortest chain of single-character modifications that
-// // leads from "from" to "to", with each intermediate step being a valid word.
-// // This is an application of breadth-first search.
-// bool word_ladder(const word_map &words, const std::string &from,
-//                  const std::string &to)
-// {
-//     auto w = words.find(from.size());
-//     if (w != words.end())
-//     {
-//         auto poss = w->second;
-//         std::vector<std::vector<std::string>> queue{{from}};
-//         while (!queue.empty())
-//         {
-//             auto curr = queue.front();
-//             queue.erase(queue.begin());
-//             for (auto i = poss.begin(); i != poss.end();)
-//             {
-//                 if (!connected(*i, curr.back()))
-//                 {
-//                     ++i;
-//                     continue;
-//                 }
-//                 if (to == *i)
-//                 {
-//                     curr.push_back(to);
-//                     std::cout << print_word_ladder(curr.begin(), curr.end(), " -> ") << '\n';
-//                     return true;
-//                 }
-//                 std::vector<std::string> temp(curr);
-//                 temp.push_back(*i);
-//                 queue.push_back(std::move(temp));
-//                 i = poss.erase(i);
-//             }
-//         }
-//     }
-//     std::cout << from << " into " << to << " cannot be done.\n";
-//     return false;
-// }
+int main()
+{
+    setlocale(LC_ALL, ".UTF8");
+    hashTable *dicts[_max_word_size_];
+    thread threads[_max_word_size_];
+    for (size_t i = 0; i < _max_word_size_; i++)
+    {
+        dicts[i] = new hashTable;
+    }
+    std::wifstream in("wordlist-big-latest.txt");
+    if (!in)
+    {
+        printf("Error: could not open words file\n");
+    }
+    wstring word;
+    while (in >> word)
+    {
+        int size = word.size();
+        dicts[size - 1]->add(word);
+    }
+    in.close();
+    for (int sizes = 0; sizes < _max_word_size_; sizes++)
+    {
+        hashTable *dict = dicts[sizes];
+        threads[sizes] = thread(graph_builder, dict);
+    }
+    for (int sizes = 0; sizes < _max_word_size_; sizes++)
+    {
+        threads[sizes].join();
+    }
+    path_finder(dicts, L"vidro", L"leite");
+    // FIXME: Latin letters are not supported
+    cout << "Longest path to "
+         << "etano"
+         << " is " << endl
+         << diameter(dicts, L"etano") << " words long." << endl;
+    // #if !defined(_detail_) && !defined(_stats_)
+    //     for (unsigned int i = 0; i < dicts[4]->size; i++)
+    //     {
+    //         if (dicts[4]->words[i] != nullptr)
+    //         {
+    //             cout << diameter(dicts, dicts[4]->words[i]->word) << endl;
+    //         }
+    //     }
+    // #endif
+    // TODO: See graphs
+    // TODO: Interesting diameters
+    // etano is the extremety of (one of the) main connected component, as it shows up in lots of diameters
+    // sitia is the extremety of (one of the) main connected component, as it shows up in lots of diameters
 
-// int main()
-// {
-//     word_map words;
-//     std::ifstream in("wordlist-big-latest.txt");
-//     if (!in)
-//     {
-//         std::cerr << "Cannot open file wordlist-four-letters.txt.\n";
-//         return EXIT_FAILURE;
-//     }
-//     std::string word;
-//     while (getline(in, word))
-//         words[word.size()].push_back(word);
-//     word_ladder(words, "bem", "mal");
-//     return EXIT_SUCCESS;
-// }
+    // connected_components(dicts, L"vidro");
+    end(dicts);
+}
