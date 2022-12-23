@@ -64,6 +64,7 @@ public:
                 delete words[i];
             }
         }
+        delete[] words;
     }
     void add(const string &word)
     {
