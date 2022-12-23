@@ -14,7 +14,7 @@ using namespace std;
 class node
 {
 public:
-    node(const wstring &word) : word(word)
+    node(const string &word) : word(word)
     {
         parent = nullptr;
         visited = false;
@@ -22,7 +22,7 @@ public:
         vertices = 1;
         edges = 0;
     }
-    wstring word;
+    string word;
     // BFS relevant data
     node *parent;
     bool visited;
@@ -41,6 +41,7 @@ public:
     node **words;
     unsigned int entries;
     int connected_components;
+    double load_factor;
     hashTable()
     {
         // Makes the dict only need to be resized once.
@@ -48,6 +49,7 @@ public:
         words = new node *[size];
         entries = 0;
         connected_components = 0;
+        load_factor = 0.75;
         for (unsigned int i = 0; i < size; i++)
         {
             words[i] = nullptr;
@@ -63,14 +65,14 @@ public:
             }
         }
     }
-    void add(const wstring &word)
+    void add(const string &word)
     {
         unsigned int index = hash(word);
         if (words[index] != nullptr && words[index]->word == word)
         {
             return;
         }
-        if (entries + 1 >= size * 0.75)
+        if (entries + 1 >= size * load_factor)
         {
             resize();
         }
@@ -90,7 +92,7 @@ public:
             create(index, word);
         }
     }
-    node *get(const wstring &word)
+    node *get(const string &word)
     {
         unsigned int index = hash(word);
         if (words[index] == nullptr)
@@ -160,7 +162,7 @@ public:
         }
         return -1;
     }
-    int DFS(node *from, node *to, int maximum_depth = 0)
+    int DFS(node *from, node *to)
     {
         for (unsigned int i = 0; i < size; i++)
         {
@@ -183,6 +185,12 @@ public:
                 q.pop();
                 if (current == to)
                 {
+                    // god why
+                    while (current->parent != nullptr && current != from)
+                    {
+                        current = current->parent;
+                        depth++;
+                    }
                     return depth;
                 }
                 for (size_t j = 0; j < current->adjacency_list.size(); j++)
@@ -196,15 +204,10 @@ public:
                     }
                 }
             }
-            depth++;
-            if (depth > maximum_depth && maximum_depth != 0)
-            {
-                return -1;
-            }
         }
         return -1;
     }
-    void list_connected_components(const wstring &word)
+    void list_connected_components(const string &word)
     {
         vector<node *> components;
         node *vertex = get(word);
@@ -221,10 +224,10 @@ public:
                 components.push_back(words[i]);
             }
         }
-        wcout << "Belonging to same connected component as " << word << "are:" << endl;
+        cout << "Belonging to same connected component as " << word << "are:" << endl;
         for (size_t i = 0; i < components.size(); i++)
         {
-            wcout << components[i]->word << "\n";
+            cout << components[i]->word << "\n";
         }
     }
     // hash table statistics
@@ -279,7 +282,7 @@ public:
         }
         return components;
     }
-    int get_diameter(node *n)
+    int get_diameter(node *n, bool print = true)
     {
         int diameter = 0;
         node *max = nullptr;
@@ -287,7 +290,11 @@ public:
         {
             if (words[i] != nullptr)
             {
-                int distance = BFS(words[i], n);
+                if (words[i]->adjacency_list.size() == 0)
+                {
+                    continue;
+                }
+                int distance = DFS(words[i], n);
                 if (distance > diameter)
                 {
                     diameter = distance;
@@ -295,25 +302,52 @@ public:
                 }
             }
         }
-        // BFS data is wiped out every run.
-        BFS(n, max);
+        // DFS data is wiped out every run.
+        DFS(n, max);
         node *res = max;
         if (res == nullptr)
         {
-            wcout << "No connected words." << endl;
             return 0;
         }
-        while (res->parent != nullptr)
+        if (print)
         {
-            wcout << res->word << " -> ";
-            res = res->parent;
+            cout << "Diameter: " << diameter << endl;
+            cout << "Path: ";
+            if (res == nullptr)
+            {
+                cout << "No connected words." << endl;
+            }
+            while (res->parent != nullptr)
+            {
+                cout << res->word << " -> ";
+                res = res->parent;
+            }
+            cout << res->word << endl;
         }
-        wcout << res->word << endl;
+
         return diameter;
+    }
+    node *get_diameter_node(node *n)
+    {
+        int diameter = 0;
+        node *max = nullptr;
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr)
+            {
+                int distance = DFS(words[i], n);
+                if (distance > diameter)
+                {
+                    diameter = distance;
+                    max = words[i];
+                }
+            }
+        }
+        return max;
     }
 
 private:
-    void create(int index, const wstring &word)
+    void create(int index, const string &word)
     {
         entries++;
         connected_components++;
@@ -373,23 +407,23 @@ private:
 
     void print_adjacency_list(node *n)
     {
-        wcout << n->word << " -> ";
+        cout << n->word << " -> ";
         for (size_t i = 0; i < n->adjacency_list.size(); i++)
         {
-            wcout << n->adjacency_list[i]->word << " ";
+            cout << n->adjacency_list[i]->word << " ";
         }
-        wcout << endl;
+        cout << endl;
     }
 
 #define FNV_OFFSET 14695981039346656037UL
 #define FNV_PRIME 1099511628211UL
     // Return 64-bit FNV-1a hash for key (NUL-terminated). See description:
     // https://en.wikipedia.org/wiki/Fowler–Noll–Vo_hash_function
-    unsigned int hash(const wstring &word)
+    unsigned int hash(const string &word)
     {
         uint64_t hash = FNV_OFFSET;
-        const wchar_t *key = word.c_str();
-        for (const wchar_t *p = key; *p; p++)
+        const char *key = word.c_str();
+        for (const char *p = key; *p; p++)
         {
             hash ^= (uint64_t)(unsigned char)(*p);
             hash *= FNV_PRIME;
@@ -424,14 +458,17 @@ private:
     }
 };
 
-int diameter(hashTable **dicts, const wstring &word)
+void longest(hashTable **dicts, const string &word)
 {
     hashTable *dict = dicts[word.size() - 1];
     node *n = dict->get(word);
-    return dict->get_diameter(n);
+    cout << "Longest path to " << word << " is " << endl
+         << dict->get_diameter(n)
+         << " words long." << endl;
+    return;
 }
 
-bool connected(const wstring &a, const wstring &b)
+bool connected(const string &a, const string &b)
 {
     if (a.size() != b.size())
         return false;
@@ -449,7 +486,7 @@ bool connected(const wstring &a, const wstring &b)
     return result;
 }
 
-void path_finder(hashTable **dicts, const wstring &start, const wstring &end)
+void path_finder(hashTable **dicts, const string &start, const string &end)
 {
     if (start.size() != end.size())
     {
@@ -457,12 +494,12 @@ void path_finder(hashTable **dicts, const wstring &start, const wstring &end)
         return;
     }
     hashTable *dict = dicts[start.size() - 1];
-    wcout << "Trying to go from " << start << " to " << end << endl;
+    cout << "Trying to go from " << start << " to " << end << endl;
     node *from = dict->get(end);
     node *to = dict->get(start);
     if (from == nullptr || to == nullptr)
     {
-        wcout << "No path found." << endl;
+        cout << "No path found." << endl;
         return;
     }
     int travelled = dict->BFS(from, to);
@@ -470,13 +507,13 @@ void path_finder(hashTable **dicts, const wstring &start, const wstring &end)
     node *res = to;
     while (res->parent != nullptr)
     {
-        wcout << res->word << " -> ";
+        cout << res->word << " -> ";
         res = res->parent;
     }
-    wcout << res->word << endl;
+    cout << res->word << endl;
 }
 
-void connected_components(hashTable **dicts, const wstring &word)
+void connected_components(hashTable **dicts, const string &word)
 {
     hashTable *dict = dicts[word.size() - 1];
     dict->list_connected_components(word);
@@ -488,13 +525,13 @@ void end(hashTable **dicts)
     file.open("stats.txt");
     for (size_t i = 0; i < _max_word_size_; i++)
     {
-#if defined(_stats_) || defined(_detail_)
+#if defined(_stats_) || defined(_detail_) || defined(_full_)
         file << endl;
         file << "Hash Table for " << i + 1 << " letter words" << endl;
         file << "Size: " << dicts[i]->size << endl;
         file << "Load factor: " << dicts[i]->get_load_factor() << endl;
         file << "Collisions: " << dicts[i]->get_collisions() << endl;
-#if defined(_detail_)
+#if defined(_detail_) || defined(_full_)
         vector<bool> distribution = dicts[i]->get_distribution();
         file << "Distribution: " << endl;
         for (size_t j = 0; j < distribution.size(); j++)
@@ -536,6 +573,47 @@ void graph_builder(hashTable *dict)
         cout << "Processed " << sizes + 1 << " letter words" << endl;
 }
 
+void longest_path(hashTable *dict)
+{
+    int largest = 0;
+    vector<node *> reprs;
+    node *max = nullptr;
+    for (unsigned int i = 0; i < dict->size; i++)
+    {
+        if (dict->words[i] != nullptr)
+        {
+            if (find(reprs.begin(), reprs.end(), dict->words[i]->representative) == reprs.end())
+            {
+                reprs.push_back(dict->words[i]->representative);
+                int depth = dict->get_diameter(dict->words[i], false);
+                if (depth > largest)
+                {
+                    largest = depth;
+                    max = dict->words[i];
+                }
+            }
+        }
+    }
+    node *origin = dict->get_diameter_node(max);
+    if (origin == nullptr || max == nullptr)
+    {
+        cout << "No path found." << endl;
+        return;
+    }
+    dict->DFS(origin, max);
+    node *res = max;
+    ofstream file;
+    file.open("longest.txt", ios::app);
+    file << "Longest path for " << max->word.size() << " letter words" << endl;
+    file << "Diameter: " << largest << endl;
+    while (res->parent != nullptr)
+    {
+        file << res->word << " -> ";
+        res = res->parent;
+    }
+    file << res->word << endl;
+}
+
 int main()
 {
     setlocale(LC_ALL, ".UTF8");
@@ -545,18 +623,17 @@ int main()
     {
         dicts[i] = new hashTable;
     }
-    std::wifstream in("wordlist-big-latest.txt");
+    ifstream in("wordlist-big-latest.txt");
     if (!in)
     {
         printf("Error: could not open words file\n");
     }
-    wstring word;
+    string word;
     while (in >> word)
     {
         int size = word.size();
         dicts[size - 1]->add(word);
     }
-    in.close();
     for (int sizes = 0; sizes < _max_word_size_; sizes++)
     {
         hashTable *dict = dicts[sizes];
@@ -566,26 +643,26 @@ int main()
     {
         threads[sizes].join();
     }
-    path_finder(dicts, L"vidro", L"leite");
-    // FIXME: Latin letters are not supported
-    cout << "Longest path to "
-         << "etano"
-         << " is " << endl
-         << diameter(dicts, L"etano") << " words long." << endl;
-    // #if !defined(_detail_) && !defined(_stats_)
-    //     for (unsigned int i = 0; i < dicts[4]->size; i++)
-    //     {
-    //         if (dicts[4]->words[i] != nullptr)
-    //         {
-    //             cout << diameter(dicts, dicts[4]->words[i]->word) << endl;
-    //         }
-    //     }
-    // #endif
+    // path_finder(dicts, "etano", "sitie");
+#ifdef _full_
+    ofstream file;
+    file.open("longest.txt", ios::trunc);
+    file.close();
+    for (int sizes = 0; sizes < _max_word_size_; sizes++)
+    {
+        hashTable *dict = dicts[sizes];
+        threads[sizes] = thread(longest_path, dict);
+    }
+    for (int sizes = 0; sizes < _max_word_size_; sizes++)
+    {
+        threads[sizes].join();
+    }
+#endif
+    // connected_components(dicts, "belo");
+    // longest(dicts, "etano");
+
     // TODO: See graphs
     // TODO: Interesting diameters
-    // etano is the extremety of (one of the) main connected component, as it shows up in lots of diameters
-    // sitia is the extremety of (one of the) main connected component, as it shows up in lots of diameters
-
-    // connected_components(dicts, L"vidro");
+    // etano and sitia are opposite extremeties of (one of the) main connected component, as they show up in lots of diameters
     end(dicts);
 }

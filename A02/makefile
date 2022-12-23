@@ -5,11 +5,16 @@
 #
 
 clean:
-	rm -rf a.out word_ladder solution_word_ladder
+	rm -rf a.out word_ladder *.exe
 
+word_ladder: word_ladder.cpp
+	g++ -Wall -Wextra -O3 word_ladder.cpp -o word_ladder -lm -march=native
 
-word_ladder:		word_ladder.c
-	cc -Wall -Wextra -O2 word_ladder.c -o word_ladder -lm
+stats: word_ladder.cpp
+	g++ -Wall -Wextra -O3 word_ladder.cpp -o word_ladder -lm -march=native -D_stats_
 
-solution_word_ladder:	solution_word_ladder.c
-	cc -Wall -Wextra -O2 solution_word_ladder.c -o solution_word_ladder -lm
+detail: word_ladder.cpp
+	g++ -Wall -Wextra -O3 word_ladder.cpp -o word_ladder -lm -march=native -D_detail_
+
+full: word_ladder.cpp
+	g++ -Wall -Wextra -O3 word_ladder.cpp -o word_ladder -lm -march=native -D_full_

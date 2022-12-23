@@ -1,0 +1,30 @@
+Longest path for 1 letter words
+Diameter: 1
+v -> x
+Longest path for 29 letter words
+Diameter: 1
+constitucionalizar-vos-íamos -> constitucionalizar-nos-íamos
+Longest path for 28 letter words
+Diameter: 1
+constitucionalizar-te-íamos -> constitucionalizar-me-íamos
+Longest path for 2 letter words
+Diameter: 30
+PS -> PT -> BT -> BE -> CE -> CP -> GP -> GB -> kB -> km -> mm -> ma -> ia -> iv -> xv -> xx -> ex -> eh -> oh -> ou -> tu -> te -> de -> dr -> ar -> as -> vs -> vi -> li -> lo -> no
+Longest path for 27 letter words
+Diameter: 1
+instrumentalizar-vos-íamos -> instrumentalizar-nos-íamos
+Longest path for 26 letter words
+Diameter: 2
+corresponsabilizar-vos-ias -> corresponsabilizar-vos-iam -> corresponsabilizar-nos-iam
+Longest path for 3 letter words
+Diameter: 74
+elo -> eco -> oco -> ovo -> ova -> ola -> ala -> ada -> ade -> ase -> use -> uso -> uno -> ano -> aro -> pro -> pio -> pia -> dia -> diz -> giz -> gim -> rim -> riu -> viu -> vii -> vai -> sai -> sal -> sul -> suo -> duo -> doo -> roo -> roa -> boa -> bom -> som -> sem -> nem -> num -> pum -> pus -> bus -> bis -> tis -> tos -> mos -> mor -> mar -> lar -> las -> ias -> iam -> Sam -> San -> Van -> Vaz -> paz -> pau -> tau -> teu -> meu -> mel -> fel -> fez -> foz -> foi -> fui -> rui -> rei -> dei -> der -> per -> pen
+Longest path for 25 letter words
+Diameter: 3
+transcendentalizar-se-iam -> transcendentalizar-te-iam -> transcendentalizar-te-ias -> transcendentalizar-me-ias
+Longest path for 24 letter words
+Diameter: 3
+contratestemunhar-me-ias -> contratestemunhar-te-ias -> contratestemunhar-te-iam -> contratestemunhar-se-iam
+Longest path for 4 letter words
+Diameter: 353
+sras -> eras -> eram -> iram -> irem -> ires -> ores -> oves -> ovem -> ovam -> oval -> oral -> orai -> trai -> traz -> truz -> cruz -> crua -> frua -> flua -> alua -> alue -> alie -> avie -> avir -> agir -> agiu -> adiu -> adia -> afia -> afta -> apta -> apto -> alto -> alho -> olho -> olmo -> elmo -> ermo -> armo -> arfo -> arfe -> arpe -> arpa -> area -> arei -> grei -> geei -> geai -> ceai -> cear -> tear -> toar -> soar -> suar -> suor -> suou -> soou -> coou -> ceou -> geou -> grou -> arou -> aros -> atos -> ator -> atar -> atam -> adam -> adem -> ades -> ales -> alas -> asas -> asai -> usai -> usam -> usem -> unem -> unes -> unis -> unia -> unha -> unhe -> unge -> urge -> urre -> urra -> urda -> urdo -> urjo -> unjo -> anjo -> ando -> anda -> anca -> inca -> isca -> isco -> asco -> asso -> osso -> ouso -> ougo -> jugo -> jogo -> joga -> ioga -> ioda -> iode -> rode -> rodo -> lodo -> ledo -> vedo -> vejo -> veja -> reja -> ruja -> ruma -> duma -> duna -> puna -> pune -> pule -> pile -> pire -> tire -> tive -> uive -> uivo -> vivo -> viva -> vila -> dila -> dilo -> digo -> ligo -> limo -> cimo -> cima -> cita -> cite -> dite -> dine -> fine -> fino -> nino -> nono -> novo -> nove -> nave -> cave -> cape -> tape -> taxe -> taxa -> tara -> para -> papa -> papo -> pado -> gado -> gajo -> gaja -> gafa -> rafa -> raia -> Gaia -> Gaza -> vaza -> vasa -> vaso -> raso -> ralo -> Palo -> Pato -> nato -> nata -> nada -> cada -> ceda -> cena -> lena -> lona -> loja -> boja -> boje -> bote -> pote -> pose -> cose -> come -> dome -> dobe -> dobo -> bobo -> boio -> bois -> dois -> does -> coes -> coei -> voei -> voem -> moem -> miem -> mies -> fies -> fiei -> piei -> piai -> piam -> liam -> lias -> luas -> ruas -> ruis -> ruim -> ruem -> suem -> suei -> subi -> suba -> juba -> jura -> lura -> lusa -> musa -> mesa -> mexa -> mexo -> nexo -> nego -> sego -> sega -> saga -> sala -> sola -> solo -> tolo -> toro -> moro -> miro -> mira -> miga -> figa -> fixa -> rixa -> roxa -> rosa -> Rosa -> Roma -> toma -> tema -> teme -> leme -> lume -> lute -> luto -> luxo -> laxo -> lavo -> lava -> lama -> mama -> mana -> mane -> mate -> mete -> mede -> fede -> fedi -> feri -> fera -> feia -> feio -> geio -> gero -> zero -> zelo -> pelo -> peco -> pico -> pica -> pisa -> sisa -> siso -> biso -> bise -> base -> bafe -> bafo -> bano -> bani -> bali -> dali -> deli -> devi -> revi -> regi -> rege -> ruge -> muge -> mugi -> muni -> muno -> huno -> humo -> sumo -> sujo -> pujo -> pojo -> pomo -> gomo -> goto -> gota -> dota -> dopa -> copa -> coca -> coco -> foco -> fofo -> fofa -> mofa -> mofe -> mole -> fole -> fale -> gale -> gele -> gela -> nela -> nula -> fula -> fulo -> furo -> faro -> saro -> sare -> vare -> vaie -> vais -> cais -> caio -> cabo -> cubo -> tubo -> tufo -> tifo -> rifo -> rife -> rime
