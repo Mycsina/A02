@@ -23,7 +23,7 @@ public:
         edges = 0;
     }
     string word;
-    // BFS relevant data
+    // search relevant data
     node *parent;
     bool visited;
     // graph data structure
@@ -522,8 +522,10 @@ void connected_components(hashTable **dicts, const string &word)
 
 void end(hashTable **dicts)
 {
+#if defined(_stats_) || defined(_detail_) || defined(_full_)
     ofstream file;
     file.open("stats.txt");
+#endif
     for (size_t i = 0; i < _max_word_size_; i++)
     {
 #if defined(_stats_) || defined(_detail_) || defined(_full_)
@@ -545,7 +547,9 @@ void end(hashTable **dicts)
 #endif
         delete dicts[i];
     }
+#if defined(_stats_) || defined(_detail_) || defined(_full_)
     file.close();
+#endif
 }
 
 void graph_builder(hashTable *dict)
@@ -606,7 +610,7 @@ void longest_path(hashTable *dict)
     ofstream file;
     file.open("longest.txt", ios::app);
     file << "Longest path for " << max->word.size() << " letter words" << endl;
-    file << "Diameter: " << largest << endl;
+    file << "Size: " << largest << endl;
     while (res->parent != nullptr)
     {
         file << res->word << " -> ";
@@ -644,7 +648,7 @@ int main()
     {
         threads[sizes].join();
     }
-    // path_finder(dicts, "etano", "sitie");
+    path_finder(dicts, "etano", "sitie");
 #ifdef _full_
     ofstream file;
     file.open("longest.txt", ios::trunc);
@@ -660,7 +664,7 @@ int main()
     }
 #endif
     // connected_components(dicts, "belo");
-    // longest(dicts, "etano");
+    longest(dicts, "etano");
 
     // TODO: See graphs
     // TODO: Interesting diameters
