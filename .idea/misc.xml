@@ -17,4 +17,8 @@
   <component name="MakefileWorkspace" PROJECT_DIR="$PROJECT_DIR$/A02">
     <contentRoot DIR="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="$USER_HOME$/anaconda3" project-jdk-type="Python SDK" />
+  <component name="PyCharmDSProjectLayout">
+    <option name="id" value="JupyterRightHiddenStructureLayout" />
+  </component>
 </project>
