@@ -1,0 +1,21 @@
+Graph for 1 letter words
+Nodes: 6
+Connected Components: 1
+Biggest Diameter: 1
+Graph for 2 letter words
+Nodes: 86
+Connected Components: 3
+Biggest Diameter: 27
+Graph for 3 letter words
+Nodes: 507
+Connected Components: 50
+Biggest Diameter: 66
+Graph for 4 letter words
+Nodes: 1998
+Connected Components: 149
+Biggest Diameter: 338
+Graph for 5 letter words
+Nodes: 6491
+Connected Components: 460
+Biggest Diameter: 1144
+Graph for 6 letter words
