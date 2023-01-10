@@ -268,20 +268,34 @@ public:
         return distribution;
     }
     // graph statistics
-    int get_connected_components()
+    int *get_graph_info()
     {
-        int components = 0;
+        vector<node *> components = get_connected_components();
+        int max = 0;
+        for (unsigned int i = 0; i < components.size(); i++)
+        {
+            int diameter = get_diameter(components[i], false);
+            if (diameter > max)
+            {
+                max = diameter;
+            }
+        }
+        return new int[3]{(int)components.size(), max, (int)entries};
+    }
+    vector<node *> get_connected_components()
+    {
+        vector<node *> representatives;
         for (unsigned int i = 0; i < size; i++)
         {
             if (words[i] != nullptr)
             {
                 if (words[i]->representative == words[i])
                 {
-                    components++;
+                    representatives.push_back(words[i]);
                 }
             }
         }
-        return components;
+        return representatives;
     }
     int get_diameter(node *n, bool print = true)
     {
@@ -459,6 +473,14 @@ private:
     }
 };
 
+void graph_info(hashTable *dict)
+{
+    int *info = dict->get_graph_info();
+    cout << "Number of total nodes: " << info[2] << endl;
+    cout << "Number of connected components: " << info[0] << endl;
+    cout << "Biggest diameter: " << info[1] << endl;
+}
+
 void longest(hashTable **dicts, const string &word)
 {
     hashTable *dict = dicts[word.size() - 1];
@@ -523,32 +545,38 @@ void connected_components(hashTable **dicts, const string &word)
 void end(hashTable **dicts)
 {
 #if defined(_stats_) || defined(_detail_) || defined(_full_)
-    ofstream file;
-    file.open("stats.txt");
+    ofstream ht, graph;
+    ht.open("stats.txt");
+    graph.open("graph.txt");
 #endif
     for (size_t i = 0; i < _max_word_size_; i++)
     {
 #if defined(_stats_) || defined(_detail_) || defined(_full_)
-        file << endl;
-        file << "Hash Table for " << i + 1 << " letter words" << endl;
-        file << "Size: " << dicts[i]->size << endl;
-        file << "Load factor: " << dicts[i]->get_load_factor() << endl;
-        file << "Collisions: " << dicts[i]->get_collisions() << endl;
+        ht << endl;
+        ht << "Hash Table for " << i + 1 << " letter words" << endl;
+        ht << "Size: " << dicts[i]->size << endl;
+        ht << "Load factor: " << dicts[i]->get_load_factor() << endl;
+        ht << "Collisions: " << dicts[i]->get_collisions() << endl;
+        graph << "Graph for " << i + 1 << " letter words" << endl;
+        int *info = dicts[i]->get_graph_info();
+        graph << "Nodes: " << info[2] << endl;
+        graph << "Connected Components: " << info[0] << endl;
+        graph << "Biggest Diameter: " << info[1] << endl;
 #if defined(_detail_) || defined(_full_)
         vector<bool> distribution = dicts[i]->get_distribution();
-        file << "Distribution: " << endl;
+        ht << "Distribution: " << endl;
         for (size_t j = 0; j < distribution.size(); j++)
         {
             if (distribution[j])
-                file << j << " ";
+                ht << j << " ";
         }
-        file << endl;
+        ht << endl;
 #endif
 #endif
         delete dicts[i];
     }
 #if defined(_stats_) || defined(_detail_) || defined(_full_)
-    file.close();
+    ht.close();
 #endif
 }
 
