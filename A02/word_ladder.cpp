@@ -562,6 +562,7 @@ void end(hashTable **dicts)
         graph << "Nodes: " << info[2] << endl;
         graph << "Connected Components: " << info[0] << endl;
         graph << "Biggest Diameter: " << info[1] << endl;
+        delete info;
 #if defined(_detail_) || defined(_full_)
         vector<bool> distribution = dicts[i]->get_distribution();
         ht << "Distribution: " << endl;
