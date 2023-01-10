@@ -1,0 +1,33 @@
+ // Do as much as you can
+//   1) MANDATORY: complete the hash table code
+//      *) hash_table_create -- v
+//      *) hash_table_grow -- v
+//      *) hash_table_free -- v
+//      *) find_word -- v
+//      +) add code to get some statistical data about the hash table -- v
+//   2) HIGHLY RECOMMENDED: build the graph (including union-find data) -- use the similar_words function...
+//      *) find_representative ? 
+//      *) add_edge -- v
+//   3) RECOMMENDED: implement breadth-first search in the graph
+//      *) breadh_first_search -- v
+//   4) RECOMMENDED: list all words belonginh to a connected component
+//      *) breadh_first_search -- v
+//      *) list_connected_component -- v
+//   5) RECOMMENDED: find the shortest path between to words
+//      *) breadh_first_search -- v
+//      *) path_finder -- v
+//      *) test the smallest path from bem to mal
+//         [ 0] bem
+//         [ 1] tem
+//         [ 2] teu
+//         [ 3] meu
+//         [ 4] mau
+//         [ 5] mal
+//      *) find other interesting word ladders  -- look into
+//   6) OPTIONAL: compute the diameter of a connected component and list the longest word chain
+//      *) breadh_first_search -- v
+//      *) connected_component_diameter ?
+//   7) OPTIONAL: print some statistics about the graph
+//      *) graph_info -- v
+//   8) OPTIONAL: test for memory leaks  Work in progress
+//

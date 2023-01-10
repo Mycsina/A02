@@ -1,0 +1,5 @@
+[0] Config.pm:306> INFO - This is Biber 2.18
+[0] Config.pm:309> INFO - Logfile is 'Relatorio.bib.blg'
+[120] biber-MSWIN32:340> INFO - === 
+[746] Utils.pm:410> ERROR - Cannot find 'Relatorio.bib.bcf'!
+[746] Biber.pm:135> INFO - ERRORS: 1
