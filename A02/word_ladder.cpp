@@ -11,16 +11,17 @@
 using namespace std;
 #define _max_word_size_ 32
 
-class node {
+class node
+{
 public:
-    node(const string &word) : word(word) {
+    node(const string &word) : word(word)
+    {
         parent = nullptr;
         visited = false;
         representative = this;
         vertices = 1;
         edges = 0;
     }
-
     string word;
     // search relevant data
     node *parent;
@@ -33,47 +34,57 @@ public:
     int edges;
 };
 
-class hashTable {
+class hashTable
+{
 public:
     unsigned int size;
     node **words;
     unsigned int entries;
     int connected_components;
     double load_factor;
-
-    hashTable() {
+    hashTable()
+    {
         // Makes the dict only need to be resized once.
         size = 65536;
         words = new node *[size];
         entries = 0;
         connected_components = 0;
         load_factor = 0.75;
-        for (unsigned int i = 0; i < size; i++) {
+        for (unsigned int i = 0; i < size; i++)
+        {
             words[i] = nullptr;
         }
     }
-
-    ~hashTable() {
-        for (unsigned int i = 0; i < size; i++) {
-            if (words[i] != nullptr) {
+    ~hashTable()
+    {
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr)
+            {
                 delete words[i];
             }
         }
         delete[] words;
     }
-
-    void add(const string &word) {
+    void add(const string &word)
+    {
         unsigned int index = hash(word);
-        if (words[index] != nullptr && words[index]->word == word) {
+        if (words[index] != nullptr && words[index]->word == word)
+        {
             return;
         }
-        if (entries + 1 >= size * load_factor) {
+        if (entries + 1 >= size * load_factor)
+        {
             resize();
         }
-        if (words[index] == nullptr) {
+        if (words[index] == nullptr)
+        {
             create(index, word);
-        } else if (words[index]->word != word) {
-            while (words[index] != nullptr && words[index]->word != word) {
+        }
+        else if (words[index]->word != word)
+        {
+            while (words[index] != nullptr && words[index]->word != word)
+            {
                 // Linear probing is the fastest way.
                 // Probably because it uses the cache more efficiently.
                 // And that matters the most when the table is huge and we have memory to spare.
@@ -82,52 +93,62 @@ public:
             create(index, word);
         }
     }
-
-    node *get(const string &word) {
+    node *get(const string &word)
+    {
         unsigned int index = hash(word);
-        if (words[index] == nullptr) {
+        if (words[index] == nullptr)
+        {
             return nullptr;
         }
-        if (words[index]->word == word) {
+        if (words[index]->word == word)
+        {
             return words[index];
         }
-        while (words[index] != nullptr && words[index]->word != word) {
+        while (words[index] != nullptr && words[index]->word != word)
+        {
             index = (index + 1) % size;
         }
         return words[index];
     }
-
     // graph functions
-    void add_edge(node *from, node *to) {
+    void add_edge(node *from, node *to)
+    {
         from->adjacency_list.push_back(to);
         to->adjacency_list.push_back(from);
         from->edges++;
         to->edges++;
         g_union(from, to);
     }
-
-    int BFS(node *from, node *to, int maximum_depth = 0) {
-        for (unsigned int i = 0; i < size; i++) {
-            if (words[i] != nullptr) {
+    int BFS(node *from, node *to, int maximum_depth = 0)
+    {
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr)
+            {
                 words[i]->visited = false;
                 words[i]->parent = nullptr;
             }
         }
-        queue < node * > q;
+        queue<node *> q;
         from->visited = true;
         q.push(from);
         int depth = 0;
-        while (!q.empty()) {
+        while (!q.empty())
+        {
             int q_size = q.size();
-            for (int i = 0; i < q_size; i++) {
+            for (int i = 0; i < q_size; i++)
+            {
                 node *current = q.front();
                 q.pop();
-                if (current == to) {
+                if (current == to)
+                {
                     return depth;
                 }
-                for (size_t j = 0; j < current->adjacency_list.size(); j++) {
+                for (size_t j = 0; j < current->adjacency_list.size(); j++)
+                {
                     node *adjacent = current->adjacency_list[j];
-                    if (!adjacent->visited) {
+                    if (!adjacent->visited)
+                    {
                         adjacent->visited = true;
                         adjacent->parent = current;
                         q.push(adjacent);
@@ -135,40 +156,49 @@ public:
                 }
             }
             depth++;
-            if (depth > maximum_depth && maximum_depth != 0) {
+            if (depth > maximum_depth && maximum_depth != 0)
+            {
                 return -1;
             }
         }
         return -1;
     }
-
-    int DFS(node *from, node *to) {
-        for (unsigned int i = 0; i < size; i++) {
-            if (words[i] != nullptr) {
+    int DFS(node *from, node *to)
+    {
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr)
+            {
                 words[i]->visited = false;
                 words[i]->parent = nullptr;
             }
         }
-        stack < node * > q;
+        stack<node *> q;
         from->visited = true;
         q.push(from);
         int depth = 0;
-        while (!q.empty()) {
+        while (!q.empty())
+        {
             int q_size = q.size();
-            for (int i = 0; i < q_size; i++) {
+            for (int i = 0; i < q_size; i++)
+            {
                 node *current = q.top();
                 q.pop();
-                if (current == to) {
+                if (current == to)
+                {
                     // god why
-                    while (current->parent != nullptr && current != from) {
+                    while (current->parent != nullptr && current != from)
+                    {
                         current = current->parent;
                         depth++;
                     }
                     return depth;
                 }
-                for (size_t j = 0; j < current->adjacency_list.size(); j++) {
+                for (size_t j = 0; j < current->adjacency_list.size(); j++)
+                {
                     node *adjacent = current->adjacency_list[j];
-                    if (!adjacent->visited) {
+                    if (!adjacent->visited)
+                    {
                         adjacent->visited = true;
                         adjacent->parent = current;
                         q.push(adjacent);
@@ -178,78 +208,110 @@ public:
         }
         return -1;
     }
-
-    void list_connected_components(const string &word) {
-        vector < node * > components;
+    void list_connected_components(const string &word)
+    {
+        vector<node *> components;
         node *vertex = get(word);
-        if (vertex == nullptr) {
+        if (vertex == nullptr)
+        {
             cout << "Word not found" << endl;
             return;
         }
         node *representative = find(vertex);
-        for (unsigned int i = 0; i < size; i++) {
-            if (words[i] != nullptr && find(words[i]) == representative) {
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr && find(words[i]) == representative)
+            {
                 components.push_back(words[i]);
             }
         }
         cout << "Belonging to same connected component as " << word << "are:" << endl;
-        for (size_t i = 0; i < components.size(); i++) {
+        for (size_t i = 0; i < components.size(); i++)
+        {
             cout << components[i]->word << "\n";
         }
     }
-
     // hash table statistics
-    double get_load_factor() {
-        return (double) entries / size;
+    double get_load_factor()
+    {
+        return (double)entries / size;
     }
-
-    int get_collisions() {
+    int get_collisions()
+    {
         unsigned int collisions = 0;
-        for (unsigned int i = 0; i < size; i++) {
-            if (words[i] != nullptr) {
-                if (hash(words[i]->word) != i) {
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr)
+            {
+                if (hash(words[i]->word) != i)
+                {
                     collisions++;
                 }
             }
         }
         return collisions;
     }
-
-    vector<bool> get_distribution() {
+    vector<bool> get_distribution()
+    {
         vector<bool> distribution;
-        for (unsigned int i = 0; i < size; i++) {
-            if (words[i] != nullptr) {
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr)
+            {
                 distribution.push_back(true);
-            } else {
+            }
+            else
+            {
                 distribution.push_back(false);
             }
         }
         return distribution;
     }
-
     // graph statistics
-    int get_connected_components() {
-        int components = 0;
-        for (unsigned int i = 0; i < size; i++) {
-            if (words[i] != nullptr) {
-                if (words[i]->representative == words[i]) {
-                    components++;
+    int *get_graph_info()
+    {
+        vector<node *> components = get_connected_components();
+        int max = 0;
+        for (unsigned int i = 0; i < components.size(); i++)
+        {
+            int diameter = get_diameter(components[i], false);
+            if (diameter > max)
+            {
+                max = diameter;
+            }
+        }
+        return new int[3]{(int)components.size(), max, (int)entries};
+    }
+    vector<node *> get_connected_components()
+    {
+        vector<node *> representatives;
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr)
+            {
+                if (words[i]->representative == words[i])
+                {
+                    representatives.push_back(words[i]);
                 }
             }
         }
-        return components;
+        return representatives;
     }
-
-    int get_diameter(node *n, bool print = true) {
+    int get_diameter(node *n, bool print = true)
+    {
         int diameter = 0;
         node *max = nullptr;
-        for (unsigned int i = 0; i < size; i++) {
-            if (words[i] != nullptr) {
-                if (words[i]->adjacency_list.size() == 0) {
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr)
+            {
+                if (words[i]->adjacency_list.size() == 0)
+                {
                     continue;
                 }
                 int distance = DFS(words[i], n);
-                if (distance > diameter) {
+                if (distance > diameter)
+                {
                     diameter = distance;
                     max = words[i];
                 }
@@ -258,16 +320,20 @@ public:
         // DFS data is wiped out every run.
         DFS(n, max);
         node *res = max;
-        if (res == nullptr) {
+        if (res == nullptr)
+        {
             return 0;
         }
-        if (print) {
+        if (print)
+        {
             cout << "Diameter: " << diameter << endl;
             cout << "Path: ";
-            if (res == nullptr) {
+            if (res == nullptr)
+            {
                 cout << "No connected words." << endl;
             }
-            while (res->parent != nullptr) {
+            while (res->parent != nullptr)
+            {
                 cout << res->word << " -> ";
                 res = res->parent;
             }
@@ -276,14 +342,17 @@ public:
 
         return diameter;
     }
-
-    node *get_diameter_node(node *n) {
+    node *get_diameter_node(node *n)
+    {
         int diameter = 0;
         node *max = nullptr;
-        for (unsigned int i = 0; i < size; i++) {
-            if (words[i] != nullptr) {
+        for (unsigned int i = 0; i < size; i++)
+        {
+            if (words[i] != nullptr)
+            {
                 int distance = DFS(words[i], n);
-                if (distance > diameter) {
+                if (distance > diameter)
+                {
                     diameter = distance;
                     max = words[i];
                 }
@@ -293,27 +362,35 @@ public:
     }
 
 private:
-    void create(int index, const string &word) {
+    void create(int index, const string &word)
+    {
         entries++;
         connected_components++;
         words[index] = new node(word);
     }
-
-    void resize() {
+    void resize()
+    {
         // High resize coefficient to reduce resizes, which are expensive.
         int coeff = 4;
         size *= coeff;
         node **new_words = new node *[size];
-        for (unsigned int i = 0; i < size; i++) {
+        for (unsigned int i = 0; i < size; i++)
+        {
             new_words[i] = nullptr;
         }
-        for (unsigned int i = 0; i < size / coeff; i++) {
-            if (words[i] != nullptr) {
+        for (unsigned int i = 0; i < size / coeff; i++)
+        {
+            if (words[i] != nullptr)
+            {
                 int index = hash(words[i]->word);
-                if (new_words[index] == nullptr) {
+                if (new_words[index] == nullptr)
+                {
                     new_words[index] = words[i];
-                } else {
-                    while (new_words[index] != nullptr) {
+                }
+                else
+                {
+                    while (new_words[index] != nullptr)
+                    {
                         index = (index + 1) % size;
                     }
                 }
@@ -323,25 +400,31 @@ private:
         words = new_words;
     }
 
-    node *find(node *vertex) {
-        if (vertex->representative != vertex) {
+    node *find(node *vertex)
+    {
+        if (vertex->representative != vertex)
+        {
             vertex->representative = find(vertex->representative);
         }
         return vertex->representative;
     }
 
-    void g_union(node *from, node *to) {
+    void g_union(node *from, node *to)
+    {
         node *from_rep = find(from);
         node *to_rep = find(to);
-        if (from_rep != to_rep) {
+        if (from_rep != to_rep)
+        {
             to_rep->representative = from_rep;
             connected_components--;
         }
     }
 
-    void print_adjacency_list(node *n) {
+    void print_adjacency_list(node *n)
+    {
         cout << n->word << " -> ";
-        for (size_t i = 0; i < n->adjacency_list.size(); i++) {
+        for (size_t i = 0; i < n->adjacency_list.size(); i++)
+        {
             cout << n->adjacency_list[i]->word << " ";
         }
         cout << endl;
@@ -349,23 +432,24 @@ private:
 
 #define FNV_OFFSET 14695981039346656037UL
 #define FNV_PRIME 1099511628211UL
-
     // Return 64-bit FNV-1a hash for key (NUL-terminated). See description:
     // https://en.wikipedia.org/wiki/Fowler–Noll–Vo_hash_function
-    unsigned int hash(const string &word) {
+    unsigned int hash(const string &word)
+    {
         uint64_t hash = FNV_OFFSET;
         const char *key = word.c_str();
-        for (const char *p = key; *p; p++) {
+        for (const char *p = key; *p; p++)
+        {
             hash ^= (uint64_t)(unsigned char)(*p);
             hash *= FNV_PRIME;
         }
         // Ensure hash is adjusted to the size of the table.
         return (size_t)(hash & (uint64_t)(size - 1));
     }
-
     // https://github.com/skeeto/hash-prospector#three-round-functions
     // Kept for reference.
-    unsigned int hash(int x) {
+    unsigned int hash(int x)
+    {
         x ^= x >> 17;
         x *= 0xed5ad4bb;
         x ^= x >> 11;
@@ -376,7 +460,8 @@ private:
         return x;
     }
 
-    unsigned int unhash(int x) {
+    unsigned int unhash(int x)
+    {
         x ^= x >> 14 ^ x >> 28;
         x *= 0x32b21703;
         x ^= x >> 15 ^ x >> 30;
@@ -388,7 +473,16 @@ private:
     }
 };
 
-void longest(hashTable **dicts, const string &word) {
+void graph_info(hashTable *dict)
+{
+    int *info = dict->get_graph_info();
+    cout << "Number of total nodes: " << info[2] << endl;
+    cout << "Number of connected components: " << info[0] << endl;
+    cout << "Biggest diameter: " << info[1] << endl;
+}
+
+void longest(hashTable **dicts, const string &word)
+{
     hashTable *dict = dicts[word.size() - 1];
     node *n = dict->get(word);
     cout << "Longest path to " << word << " is " << endl
@@ -397,12 +491,15 @@ void longest(hashTable **dicts, const string &word) {
     return;
 }
 
-bool connected(const string &a, const string &b) {
+bool connected(const string &a, const string &b)
+{
     if (a.size() != b.size())
         return false;
     bool result = false;
-    for (size_t i = 0; i < a.size(); i++) {
-        if (a[i] != b[i]) {
+    for (size_t i = 0; i < a.size(); i++)
+    {
+        if (a[i] != b[i])
+        {
             // Only one difference is allowed
             if (result)
                 return false;
@@ -412,8 +509,10 @@ bool connected(const string &a, const string &b) {
     return result;
 }
 
-void path_finder(hashTable **dicts, const string &start, const string &end) {
-    if (start.size() != end.size()) {
+void path_finder(hashTable **dicts, const string &start, const string &end)
+{
+    if (start.size() != end.size())
+    {
         cout << "Cannot compare different sizes." << endl;
         return;
     }
@@ -421,69 +520,85 @@ void path_finder(hashTable **dicts, const string &start, const string &end) {
     cout << "Trying to go from " << start << " to " << end << endl;
     node *from = dict->get(end);
     node *to = dict->get(start);
-    if (from == nullptr || to == nullptr) {
+    if (from == nullptr || to == nullptr)
+    {
         cout << "No path found." << endl;
         return;
     }
     int travelled = dict->BFS(from, to);
     cout << "Travelled " << travelled << " nodes. " << endl;
     node *res = to;
-    while (res->parent != nullptr) {
+    while (res->parent != nullptr)
+    {
         cout << res->word << " -> ";
         res = res->parent;
     }
     cout << res->word << endl;
 }
 
-void connected_components(hashTable **dicts, const string &word) {
+void connected_components(hashTable **dicts, const string &word)
+{
     hashTable *dict = dicts[word.size() - 1];
     dict->list_connected_components(word);
 }
 
-void end(hashTable **dicts) {
+void end(hashTable **dicts)
+{
 #if defined(_stats_) || defined(_detail_) || defined(_full_)
-    ofstream file;
-    file.open("stats.txt");
+    ofstream ht, graph;
+    ht.open("stats.txt");
+    graph.open("graph.txt");
 #endif
-    for (size_t i = 0; i < _max_word_size_; i++) {
+    for (size_t i = 0; i < _max_word_size_; i++)
+    {
 #if defined(_stats_) || defined(_detail_) || defined(_full_)
-        file << endl;
-        file << "Hash Table for " << i + 1 << " letter words" << endl;
-        file << "Size: " << dicts[i]->size << endl;
-        file << "Load factor: " << dicts[i]->get_load_factor() << endl;
-        file << "Collisions: " << dicts[i]->get_collisions() << endl;
+        ht << endl;
+        ht << "Hash Table for " << i + 1 << " letter words" << endl;
+        ht << "Size: " << dicts[i]->size << endl;
+        ht << "Load factor: " << dicts[i]->get_load_factor() << endl;
+        ht << "Collisions: " << dicts[i]->get_collisions() << endl;
+        graph << "Graph for " << i + 1 << " letter words" << endl;
+        int *info = dicts[i]->get_graph_info();
+        graph << "Nodes: " << info[2] << endl;
+        graph << "Connected Components: " << info[0] << endl;
+        graph << "Biggest Diameter: " << info[1] << endl;
+        delete info;
 #if defined(_detail_) || defined(_full_)
         vector<bool> distribution = dicts[i]->get_distribution();
-        file << "Distribution: " << endl;
+        ht << "Distribution: " << endl;
         for (size_t j = 0; j < distribution.size(); j++)
         {
             if (distribution[j])
-                file << j << " ";
+                ht << j << " ";
         }
-        file << endl;
+        ht << endl;
 #endif
 #endif
         delete dicts[i];
     }
 #if defined(_stats_) || defined(_detail_) || defined(_full_)
-    file.close();
+    ht.close();
 #endif
 }
 
-void graph_builder(hashTable *dict) {
+void graph_builder(hashTable *dict)
+{
     int sizes = 0;
     // TODO: Optimize this, O(n^1.5) ish isn't good
-    for (size_t i = 0; i < dict->size; i++) {
+    for (size_t i = 0; i < dict->size; i++)
+    {
         node *from = dict->words[i];
         if (from == nullptr)
             continue;
         if (sizes == 0)
             sizes = from->word.size();
-        for (size_t j = i + 1; j < dict->size; j++) {
+        for (size_t j = i + 1; j < dict->size; j++)
+        {
             node *to = dict->words[j];
             if (to == nullptr)
                 continue;
-            if (connected(from->word, to->word)) {
+            if (connected(from->word, to->word))
+            {
                 dict->add_edge(from, to);
             }
         }
@@ -492,16 +607,21 @@ void graph_builder(hashTable *dict) {
         cout << "Processed " << sizes + 1 << " letter words" << endl;
 }
 
-void longest_path(hashTable *dict) {
+void longest_path(hashTable *dict)
+{
     int largest = 0;
-    vector < node * > reprs;
+    vector<node *> reprs;
     node *max = nullptr;
-    for (unsigned int i = 0; i < dict->size; i++) {
-        if (dict->words[i] != nullptr) {
-            if (find(reprs.begin(), reprs.end(), dict->words[i]->representative) == reprs.end()) {
+    for (unsigned int i = 0; i < dict->size; i++)
+    {
+        if (dict->words[i] != nullptr)
+        {
+            if (find(reprs.begin(), reprs.end(), dict->words[i]->representative) == reprs.end())
+            {
                 reprs.push_back(dict->words[i]->representative);
                 int depth = dict->get_diameter(dict->words[i], false);
-                if (depth > largest) {
+                if (depth > largest)
+                {
                     largest = depth;
                     max = dict->words[i];
                 }
@@ -509,7 +629,8 @@ void longest_path(hashTable *dict) {
         }
     }
     node *origin = dict->get_diameter_node(max);
-    if (origin == nullptr || max == nullptr) {
+    if (origin == nullptr || max == nullptr)
+    {
         cout << "No path found." << endl;
         return;
     }
@@ -519,34 +640,41 @@ void longest_path(hashTable *dict) {
     file.open("longest.txt", ios::app);
     file << "Longest path for " << max->word.size() << " letter words" << endl;
     file << "Size: " << largest << endl;
-    while (res->parent != nullptr) {
+    while (res->parent != nullptr)
+    {
         file << res->word << " -> ";
         res = res->parent;
     }
     file << res->word << endl;
 }
 
-int main() {
+int main()
+{
     setlocale(LC_ALL, ".UTF8");
     hashTable *dicts[_max_word_size_];
     thread threads[_max_word_size_];
-    for (size_t i = 0; i < _max_word_size_; i++) {
+    for (size_t i = 0; i < _max_word_size_; i++)
+    {
         dicts[i] = new hashTable;
     }
     ifstream in("wordlist-big-latest.txt");
-    if (!in) {
+    if (!in)
+    {
         printf("Error: could not open words file\n");
     }
     string word;
-    while (in >> word) {
+    while (in >> word)
+    {
         int size = word.size();
         dicts[size - 1]->add(word);
     }
-    for (int sizes = 0; sizes < _max_word_size_; sizes++) {
+    for (int sizes = 0; sizes < _max_word_size_; sizes++)
+    {
         hashTable *dict = dicts[sizes];
         threads[sizes] = thread(graph_builder, dict);
     }
-    for (int sizes = 0; sizes < _max_word_size_; sizes++) {
+    for (int sizes = 0; sizes < _max_word_size_; sizes++)
+    {
         threads[sizes].join();
     }
     path_finder(dicts, "etano", "sitie");
