@@ -1,0 +1,140 @@
+% Preamble
+\documentclass[a4paper,11pt]{article}
+\title{}
+\author{
+    André Cardoso 50\%\\
+    andremacardoso@ua.pt\\
+    108269\\
+    \and
+    Tiago Figueiredo 50\%\\
+    tiago.a.figueiredo@ua.pt\\
+    107263\\
+}
+\date{09 de Janeiro de 2023}
+
+%packages
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage[portuguese]{babel}
+\usepackage{microtype}
+\usepackage{xspace}
+\usepackage{url}
+\usepackage{csquotes}
+\usepackage{lipsum}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage[
+    backend=bibtex,
+    style=alphabetic,
+    sorting=ynt,
+    bibencoding=utf8
+]{biblatex}
+\addbibresource{Relatorio.bib}
+
+\newcommand{\head}[1]{\textnormal{\textbf{#1}}}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\lstset{basicstyle=\ttfamily,
+    showstringspaces=false,
+    commentstyle=\color{dkgreen},
+    keywordstyle=\color{blue},
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{mauve},
+    breaklines=true,
+    breakatwhitespace=true,
+}
+
+% Document
+\begin{document}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{deti2}\label{fig:figure}
+    \end{figure}
+    \maketitle
+    \tableofcontents
+    \clearpage
+
+
+    \section{Introdução}\label{sec:introducao}
+
+
+    \section{O Problema Apresentado}\label{sec:o-problema-apresentado}
+
+
+    \section{Funções Usadas}\label{sec:funcoes-usadas}
+
+    \subsection{Hash Table}\label{subsec:hash-table}
+
+    \subsubsection{Constructor}
+
+    \subsubsection{Destructor}
+
+    \subsubsection{add}
+
+    \subsubsection{get}
+
+    \subsubsection{add\_edge}
+
+    \subsubsection{BFS}
+
+    \subsubsection{DFS}
+    
+    \subsubsection{list\_connected\_components}
+    
+    \subsubsection{find}
+    
+    \subsubsection{g\_union}
+    
+    \subsubsection{print\_adjacency\_list}
+    
+    \subsubsection{hash}
+    
+    \subsubsection{unhash}
+
+
+    \subsection{Estatísticas da Hash Table}\label{subsec:estatisticas-da-hash-table}
+
+    \subsubsection{get\_load\_factor}
+    
+    \subsubsection{get\_collisions}
+    
+    \subsubsection{get\_distribution}
+    
+    
+    \subsection{Estatísticas do Grafo}\label{subsec:estatisticas-do-grafo}
+    
+    \subsubsection{get\_connected\_components}
+    
+    \subsubsection{get\_diameter}
+    
+    \subsubsection{get\_diameter\_node}
+    
+
+    \subsection{Outras Funções}\label{subsec:outras-funcoes}
+
+
+    \section{Resultados}\label{sec:resultados}
+
+    \clearpage
+
+
+    \section{Referências}\label{sec:referencias}~\nocite{aed,cpp}
+    \printbibliography[
+        heading=none,
+    ]
+
+    \clearpage
+
+
+    \section{Apêndice}\label{sec:apendice}
+
+
+\end{document}

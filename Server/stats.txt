@@ -1,0 +1,224 @@
+
+Hash Table for 1 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 2 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 3 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 4 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 5 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 6 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 7 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 8 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 9 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 10 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 11 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 12 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 13 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 14 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 15 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 16 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 17 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 18 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 19 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 20 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 21 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 22 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 23 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 24 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 25 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 26 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 27 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 28 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 29 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 30 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 31 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+
+
+Hash Table for 32 letter words
+Size: 65536
+Load factor: 0
+Collisions: 0
+Distribution: 
+

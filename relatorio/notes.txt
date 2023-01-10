@@ -1,0 +1,52 @@
+-- Intro
+
+-- Problem
+
+-- Functions
+
+	-- Hash Table (The class)
+
+		-- Create aka constructor
+		-- Delete aka destructor		
+		-- add
+		-- get
+		-- add_edge
+		-- BFS ( breadh_first_search ? )
+		-- DFS ( ??? ) { idk, not in the c file }
+		-- list_connected_components
+		-- resize
+		-- find
+		-- g union ( again ??? )
+		-- print adjacey list
+		
+		-- hash (str)
+		-- hash (int)
+		-- unhash	
+		
+		-- STATS
+			
+			-- get load factor
+			-- get collisions
+			-- get dist
+			
+			-- get connected components
+			-- get diameter
+			-- get diamenter node
+
+		-- path finder
+		-- connected components
+		-- graph builder
+		-- longest path
+	 
+
+-- Results
+
+	-- Diameter of each component
+	-- Statistics (data structures)
+	-- Statistics (Run time?)
+	-- Server Statistics and Largest Ladders
+	-- Mem Leaks	
+
+-- Sources
+
+-- Code Appendi
