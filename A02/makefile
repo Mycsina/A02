@@ -20,4 +20,4 @@ full: word_ladder.cpp
 	g++ -Wall -Wextra -O3 word_ladder.cpp -o word_ladder -lm -march=native -D_full_
 
 debug: word_ladder.cpp
-	g++ -Wall -Wextra -O0 -ggdb3 word_ladder.cpp -o word_ladder -lm -march=native -D_full_
+	g++ -Wall -Wextra -O0 -ggdb3 word_ladder.cpp -o word_ladder -lm -march=native -D_detail_
