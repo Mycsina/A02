@@ -15,7 +15,3 @@ Nodes: 1998
 Connected Components: 149
 Biggest Diameter: 338
 Graph for 5 letter words
-Nodes: 6491
-Connected Components: 460
-Biggest Diameter: 1144
-Graph for 6 letter words

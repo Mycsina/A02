@@ -7,14 +7,12 @@
 \contentsline {subsubsection}{\numberline {2.1.3}add}{3}{}%
 \contentsline {subsubsection}{\numberline {2.1.4}get}{4}{}%
 \contentsline {subsubsection}{\numberline {2.1.5}add\_edge}{4}{}%
-\contentsline {subsubsection}{\numberline {2.1.6}BFS}{5}{}%
+\contentsline {subsubsection}{\numberline {2.1.6}BFS}{4}{}%
 \contentsline {subsubsection}{\numberline {2.1.7}DFS}{5}{}%
 \contentsline {subsubsection}{\numberline {2.1.8}list\_connected\_components}{5}{}%
-\contentsline {subsubsection}{\numberline {2.1.9}find}{6}{}%
+\contentsline {subsubsection}{\numberline {2.1.9}find}{5}{}%
 \contentsline {subsubsection}{\numberline {2.1.10}g\_union}{6}{}%
-\contentsline {subsubsection}{\numberline {2.1.11}print\_adjacency\_list}{6}{}%
-\contentsline {subsubsection}{\numberline {2.1.12}hash}{6}{}%
-\contentsline {subsubsection}{\numberline {2.1.13}unhash}{6}{}%
+\contentsline {subsubsection}{\numberline {2.1.11}hash and unhash}{6}{}%
 \contentsline {subsection}{\numberline {2.2}Estatísticas da Hash Table}{6}{}%
 \contentsline {subsubsection}{\numberline {2.2.1}get\_load\_factor e get\_collisions}{6}{}%
 \contentsline {subsubsection}{\numberline {2.2.2}get\_distribution}{6}{}%
@@ -29,9 +27,12 @@
 \contentsline {subsubsection}{\numberline {2.4.4}connected\_components}{7}{}%
 \contentsline {section}{\numberline {3}Resultados}{7}{}%
 \contentsline {subsection}{\numberline {3.1}Resultados gerais}{7}{}%
-\contentsline {subsection}{\numberline {3.2}Testes de Memory Leaks}{7}{}%
+\contentsline {subsection}{\numberline {3.2}Testes de Memory Leaks}{9}{}%
 \contentsline {subsection}{\numberline {3.3}Resultados ao fim de 14 dias}{9}{}%
-\contentsline {section}{\numberline {4}Referências}{10}{}%
-\contentsline {section}{\numberline {5}Apêndice}{11}{}%
-\contentsline {subsection}{\numberline {5.1}word\_ladder.cpp}{11}{}%
-\contentsline {subsection}{\numberline {5.2}makefile}{23}{}%
+\contentsline {section}{\numberline {4}Referências}{11}{}%
+\contentsline {section}{\numberline {5}Apêndice}{12}{}%
+\contentsline {subsection}{\numberline {5.1}word\_ladder.cpp}{12}{}%
+\contentsline {subsection}{\numberline {5.2}makefile}{24}{}%
+\contentsline {subsection}{\numberline {5.3}valgrind-out.txt}{24}{}%
+\contentsline {subsection}{\numberline {5.4}longest.txt}{30}{}%
+\contentsline {subsection}{\numberline {5.5}Ficheiros em Python}{45}{}%

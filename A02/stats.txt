@@ -23,8 +23,3 @@ Hash Table for 5 letter words
 Size: 65536
 Load factor: 0.0990448
 Collisions: 299
-
-Hash Table for 6 letter words
-Size: 65536
-Load factor: 0.217422
-Collisions: 1499
