@@ -143,8 +143,7 @@ O destrutor dá um loop pelo array \emph{words} eliminando cada elemento não nu
     A função \emph{find} é uma função recursiva que encontra o \emph{representative}  de vértice do grafo, verificando se o vértice atual é o requerido até o encontrar.
     
     \subsubsection{g\_union}
-    
-   
+    A função \emph{g\_union}, faz uso da função \emph{find}, para encontrar os representativos das nodes \emph{to} e \emph{from}, tornando por fim, o representativo da node \emph{to} no mesmo do da node \emph{from}. Isto só acontece se os representativos não forem os mesmos.
     
     \subsubsection{hash and unhash}
     A função de hash transforma um inteiro ou através do \emph{operator overloading} disponível do \emph{C++}, uma função com o mesmo nome existe para em vez de um inteiro receber uma string, e através do método \emph{64-bit FNV-1a hash} encodificar a string ou inteiro fornecido de modo a poder ser usado como index da hash table. A função unhash reverte este processo, como seria previsivel

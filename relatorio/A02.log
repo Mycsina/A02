@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.1)  15 JAN 2023 23:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.1)  15 JAN 2023 23:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -651,60 +651,56 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 <output_4_1.png, id=31, 354.123pt x 368.577pt>
 File: output_4_1.png Graphic file (type png)
 <use output_4_1.png>
-Package pdftex.def Info: output_4_1.png  used on input line 195.
+Package pdftex.def Info: output_4_1.png  used on input line 194.
 (pdftex.def)             Requested size: 360.0pt x 374.72313pt.
 <output_4_0.png, id=32, 1187.3961pt x 323.7696pt>
 File: output_4_0.png Graphic file (type png)
 <use output_4_0.png>
-Package pdftex.def Info: output_4_0.png  used on input line 201.
+Package pdftex.def Info: output_4_0.png  used on input line 200.
 (pdftex.def)             Requested size: 360.0pt x 98.15921pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 189--204
+Underfull \hbox (badness 10000) in paragraph at lines 188--203
 
  []
 
-[7]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[8 <./output_4_1.png>]
+[7] [8 <./output_4_1.png>]
 <cpu.png, id=41, 636.3775pt x 181.67876pt>
 File: cpu.png Graphic file (type png)
 <use cpu.png>
-Package pdftex.def Info: cpu.png  used on input line 218.
+Package pdftex.def Info: cpu.png  used on input line 217.
 (pdftex.def)             Requested size: 360.0pt x 102.77342pt.
 <iops.png, id=42, 628.3475pt x 181.67876pt>
 File: iops.png Graphic file (type png)
 <use iops.png>
-Package pdftex.def Info: iops.png  used on input line 220.
+Package pdftex.def Info: iops.png  used on input line 219.
 (pdftex.def)             Requested size: 360.0pt x 104.08745pt.
 <net.png, id=43, 630.355pt x 181.67876pt>
 File: net.png Graphic file (type png)
 <use net.png>
-Package pdftex.def Info: net.png  used on input line 222.
+Package pdftex.def Info: net.png  used on input line 221.
 (pdftex.def)             Requested size: 360.0pt x 103.75755pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--224
+Underfull \hbox (badness 10000) in paragraph at lines 215--223
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--224
+Underfull \hbox (badness 10000) in paragraph at lines 215--223
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--224
+Underfull \hbox (badness 10000) in paragraph at lines 215--223
 
  []
 
 
-Overfull \hbox (9.12128pt too wide) in paragraph at lines 216--224
+Overfull \hbox (9.12128pt too wide) in paragraph at lines 215--223
 \OT1/cmr/m/n/10.95 (-20) Assim sendo, as mai-o-res word lad-ders en-con-tra-das
  por este pro-grama encontram-
  []
 
-[9 <./output_4_0.png> <./cpu.png>] [10 <./iops.png> <./net.png>]
+[9 <./output_4_0.png>] [10 <./cpu.png> <./iops.png> <./net.png>]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
@@ -717,7 +713,7 @@ Missing character: There is no â in font cmtt10!
 Missing character: There is no € in font cmtt10!
 Missing character: There is no “ in font cmtt10!
 
-Overfull \hbox (0.66899pt too wide) in paragraph at lines 230--230
+Overfull \hbox (0.66899pt too wide) in paragraph at lines 229--229
 []\OT1/cmr/m/n/10.95 (-20) Christopher Wel-lons. \OT1/cmr/m/it/10.95 (-20) skee
 to/hash-prospector\OT1/cmr/m/n/10.95 (-20) . \OT1/cmr/m/sc/10.95 (-20) url\OT1/
 cmr/m/n/10.95 (-20) : $\OT1/cmtt/m/n/10.95 https : / / github .
@@ -737,31 +733,31 @@ File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 
 ] [13] [14] [15]
 [16] [17] [18]
-Overfull \hbox (9.64677pt too wide) in paragraph at lines 603--604
+Overfull \hbox (9.64677pt too wide) in paragraph at lines 602--603
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][]  
  []
 
 [19] [20] [21] [22] [23]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 818.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 817.
  [24]
-Overfull \hbox (6.49698pt too wide) in paragraph at lines 855--856
+Overfull \hbox (6.49698pt too wide) in paragraph at lines 854--855
 [][][][][][][][][][][][][][][][][][][][][][][][]  
  []
 
 
-Overfull \hbox (132.49588pt too wide) in paragraph at lines 861--862
+Overfull \hbox (132.49588pt too wide) in paragraph at lines 860--861
 [][][][][][][][][][][][][][] 
  []
 
 [25]
-Overfull \hbox (132.49588pt too wide) in paragraph at lines 904--905
+Overfull \hbox (132.49588pt too wide) in paragraph at lines 903--904
 [][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (132.49588pt too wide) in paragraph at lines 910--911
+Overfull \hbox (132.49588pt too wide) in paragraph at lines 909--910
 [][][][][][][][][][][][][][] 
  []
 
@@ -770,107 +766,107 @@ Overfull \hbox (132.49588pt too wide) in paragraph at lines 910--911
 <graph_stats.pdf, id=168, 614.295pt x 794.97pt>
 File: graph_stats.pdf Graphic file (type pdf)
 <use graph_stats.pdf>
-Package pdftex.def Info: graph_stats.pdf  used on input line 1060.
+Package pdftex.def Info: graph_stats.pdf  used on input line 1059.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 File: graph_stats.pdf Graphic file (type pdf)
 <use graph_stats.pdf>
-Package pdftex.def Info: graph_stats.pdf  used on input line 1060.
+Package pdftex.def Info: graph_stats.pdf  used on input line 1059.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 <graph_stats.pdf, id=171, page=1, 614.295pt x 794.97pt>
 File: graph_stats.pdf Graphic file (type pdf)
 <use graph_stats.pdf, page 1>
-Package pdftex.def Info: graph_stats.pdf , page1 used on input line 1060.
+Package pdftex.def Info: graph_stats.pdf , page1 used on input line 1059.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 File: graph_stats.pdf Graphic file (type pdf)
 <use graph_stats.pdf, page 1>
-Package pdftex.def Info: graph_stats.pdf , page1 used on input line 1060.
+Package pdftex.def Info: graph_stats.pdf , page1 used on input line 1059.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
  [45]
 File: graph_stats.pdf Graphic file (type pdf)
 <use graph_stats.pdf, page 1>
-Package pdftex.def Info: graph_stats.pdf , page1 used on input line 1060.
+Package pdftex.def Info: graph_stats.pdf , page1 used on input line 1059.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: graph_stats.pdf Graphic file (type pdf)
 <use graph_stats.pdf, page 1>
-Package pdftex.def Info: graph_stats.pdf , page1 used on input line 1060.
+Package pdftex.def Info: graph_stats.pdf , page1 used on input line 1059.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: graph_stats.pdf Graphic file (type pdf)
 <use graph_stats.pdf, page 1>
-Package pdftex.def Info: graph_stats.pdf , page1 used on input line 1060.
+Package pdftex.def Info: graph_stats.pdf , page1 used on input line 1059.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
  [46 <./graph_stats.pdf>]
 <graph_stats.pdf, id=220, page=2, 614.295pt x 794.97pt>
 File: graph_stats.pdf Graphic file (type pdf)
 <use graph_stats.pdf, page 2>
-Package pdftex.def Info: graph_stats.pdf , page2 used on input line 1060.
+Package pdftex.def Info: graph_stats.pdf , page2 used on input line 1059.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: graph_stats.pdf Graphic file (type pdf)
 <use graph_stats.pdf, page 2>
-Package pdftex.def Info: graph_stats.pdf , page2 used on input line 1060.
+Package pdftex.def Info: graph_stats.pdf , page2 used on input line 1059.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: graph_stats.pdf Graphic file (type pdf)
 <use graph_stats.pdf, page 2>
-Package pdftex.def Info: graph_stats.pdf , page2 used on input line 1060.
+Package pdftex.def Info: graph_stats.pdf , page2 used on input line 1059.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
  [47 <./graph_stats.pdf>]
 <table_stats.pdf, id=227, 614.295pt x 794.97pt>
 File: table_stats.pdf Graphic file (type pdf)
 <use table_stats.pdf>
-Package pdftex.def Info: table_stats.pdf  used on input line 1061.
+Package pdftex.def Info: table_stats.pdf  used on input line 1060.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 File: table_stats.pdf Graphic file (type pdf)
 <use table_stats.pdf>
-Package pdftex.def Info: table_stats.pdf  used on input line 1061.
+Package pdftex.def Info: table_stats.pdf  used on input line 1060.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 <table_stats.pdf, id=230, page=1, 614.295pt x 794.97pt>
 File: table_stats.pdf Graphic file (type pdf)
 <use table_stats.pdf, page 1>
-Package pdftex.def Info: table_stats.pdf , page1 used on input line 1061.
+Package pdftex.def Info: table_stats.pdf , page1 used on input line 1060.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 File: table_stats.pdf Graphic file (type pdf)
 <use table_stats.pdf, page 1>
-Package pdftex.def Info: table_stats.pdf , page1 used on input line 1061.
+Package pdftex.def Info: table_stats.pdf , page1 used on input line 1060.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: table_stats.pdf Graphic file (type pdf)
 <use table_stats.pdf, page 1>
-Package pdftex.def Info: table_stats.pdf , page1 used on input line 1061.
+Package pdftex.def Info: table_stats.pdf , page1 used on input line 1060.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: table_stats.pdf Graphic file (type pdf)
 <use table_stats.pdf, page 1>
-Package pdftex.def Info: table_stats.pdf , page1 used on input line 1061.
+Package pdftex.def Info: table_stats.pdf , page1 used on input line 1060.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: table_stats.pdf Graphic file (type pdf)
 <use table_stats.pdf, page 1>
-Package pdftex.def Info: table_stats.pdf , page1 used on input line 1061.
+Package pdftex.def Info: table_stats.pdf , page1 used on input line 1060.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 
 [48 <./table_stats.pdf>]
 <table_stats.pdf, id=259, page=2, 614.295pt x 794.97pt>
 File: table_stats.pdf Graphic file (type pdf)
 <use table_stats.pdf, page 2>
-Package pdftex.def Info: table_stats.pdf , page2 used on input line 1061.
+Package pdftex.def Info: table_stats.pdf , page2 used on input line 1060.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: table_stats.pdf Graphic file (type pdf)
 <use table_stats.pdf, page 2>
-Package pdftex.def Info: table_stats.pdf , page2 used on input line 1061.
+Package pdftex.def Info: table_stats.pdf , page2 used on input line 1060.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: table_stats.pdf Graphic file (type pdf)
 <use table_stats.pdf, page 2>
-Package pdftex.def Info: table_stats.pdf , page2 used on input line 1061.
+Package pdftex.def Info: table_stats.pdf , page2 used on input line 1060.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
  [49 <./table_stats.pdf>]
 <table_stats.pdf, id=270, page=3, 614.295pt x 794.97pt>
 File: table_stats.pdf Graphic file (type pdf)
 <use table_stats.pdf, page 3>
-Package pdftex.def Info: table_stats.pdf , page3 used on input line 1061.
+Package pdftex.def Info: table_stats.pdf , page3 used on input line 1060.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: table_stats.pdf Graphic file (type pdf)
 <use table_stats.pdf, page 3>
-Package pdftex.def Info: table_stats.pdf , page3 used on input line 1061.
+Package pdftex.def Info: table_stats.pdf , page3 used on input line 1060.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: table_stats.pdf Graphic file (type pdf)
 <use table_stats.pdf, page 3>
-Package pdftex.def Info: table_stats.pdf , page3 used on input line 1061.
+Package pdftex.def Info: table_stats.pdf , page3 used on input line 1060.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
  [50 <./table_stats.pdf>]
 (./A02.aux)
@@ -884,7 +880,7 @@ Package logreq Info: Writing requests to 'A02.run.xml'.
 Here is how much of TeX's memory you used:
  17804 strings out of 478238
  312743 string characters out of 5850456
- 1378929 words of memory out of 5000000
+ 1377923 words of memory out of 5000000
  35707 multiletter control sequences out of 15000+600000
  480998 words of font info for 129 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -906,7 +902,7 @@ c/amsfonts/cm/cmtt8.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfit
 share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dis
 t/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/p
 ublic/cm-super/sftt1095.pfb>
-Output written on A02.pdf (50 pages, 550158 bytes).
+Output written on A02.pdf (50 pages, 550500 bytes).
 PDF statistics:
  346 PDF objects out of 1000 (max. 8388607)
  216 compressed objects within 3 object streams
