@@ -28,7 +28,10 @@
 \contentsline {subsubsection}{\numberline {2.4.3}path\_finder}{7}{}%
 \contentsline {subsubsection}{\numberline {2.4.4}connected\_components}{7}{}%
 \contentsline {section}{\numberline {3}Resultados}{7}{}%
-\contentsline {section}{\numberline {4}Referências}{8}{}%
-\contentsline {section}{\numberline {5}Apêndice}{9}{}%
-\contentsline {subsection}{\numberline {5.1}word\_ladder.cpp}{9}{}%
-\contentsline {subsection}{\numberline {5.2}makefile}{21}{}%
+\contentsline {subsection}{\numberline {3.1}Resultados gerais}{7}{}%
+\contentsline {subsection}{\numberline {3.2}Testes de Memory Leaks}{7}{}%
+\contentsline {subsection}{\numberline {3.3}Resultados ao fim de 14 dias}{9}{}%
+\contentsline {section}{\numberline {4}Referências}{10}{}%
+\contentsline {section}{\numberline {5}Apêndice}{11}{}%
+\contentsline {subsection}{\numberline {5.1}word\_ladder.cpp}{11}{}%
+\contentsline {subsection}{\numberline {5.2}makefile}{23}{}%

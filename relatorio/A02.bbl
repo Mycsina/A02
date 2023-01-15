@@ -17,6 +17,20 @@
 \endgroup
 
 \datalist[entry]{ynt/global//global/global}
+  \entry{valgrind}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Val}
+    \field{sortinit}{2}
+    \field{sortinithash}{2}
+    \field{title}{How do I use valgrind to find memory leaks?}
+    \verb{url}
+    \verb https://stackoverflow.com/questions/5134891/how-do-i-use-valgrind-to-
+    \verb find-memory-leaks
+    \endverb
+    \field{journaltitle}{Stack Overflow}
+    \field{year}{2011}
+  \endentry
+
   \entry{cpp}{online}{}
     \name{author}{1}{}{%
       {{hash=RC}{%
@@ -67,6 +81,40 @@
     \verb elearning.ua.pt
     \endverb
     \field{year}{2022}
+  \endentry
+
+  \entry{fowler}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Fow}
+    \field{sortinit}{9}
+    \field{sortinithash}{9}
+    \field{title}{Fowler-Noll-Vo hash function}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/Fowler–Noll–Vo_hash_function
+    \endverb
+    \field{journaltitle}{Wikipedia}
+  \endentry
+
+  \entry{skeeto}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=WC}{%
+         family={Wellons},
+         familyi={W\bibinitperiod},
+         given={Christopher},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WC1}
+    \strng{fullhash}{WC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Wel}
+    \field{sortinit}{9}
+    \field{sortinithash}{9}
+    \field{title}{skeeto/hash-prospector}
+    \verb{url}
+    \verb https://github.com/skeeto/hash-prospector#three-round-functions
+    \endverb
   \endentry
 \enddatalist
 \endinput
