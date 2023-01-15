@@ -100,20 +100,46 @@ Como tal para resolver o problema proposto de criar um algoritmo em \emph{C/C++}
     Sendo a linguagem de progamação escolhida para a resolução de este problema \emph{C++}, a \emph{Hash table} foi implementada através de duas classes, uma que contém os parâmetros de cada nó da \emph{Hash Table}, e uma que contém a implementação da \emph{Hash Table}.
 
     \subsubsection{Constructor}
+    O construtor da classe hashTable é um construtor padrão que inicializa todas as variáveis da classe quando um objeto da classe é criado. Ele é chamado quando o objeto é criado sem argumentos ou com o construtor padrão.
+
+    Ele define o tamanho da tabela hash como sendo 65536.
+    Ele cria um array de ponteiros chamado "words" com o tamanho da tabela.
+    Ele inicializa a variável entries para 0, a variável connected\_components para 0 e a variável load\_factor para 0,75.
+    Ele define todos os elementos do array words como nullptr, o que representa que os elementos da tabela estão vazios.
 
     \subsubsection{Destructor}
-
+O destrutor ele faz um loop pelo array words e deleta cada elemento não nulo e finalmente deleta o array words.
+   
     \subsubsection{add}
+    Esta função é usada para adicionar uma nova palavra à tabela hash. A função recebe um único argumento, uma string chamada "word" que representa a palavra a ser adicionada à tabela.
+
+    A função começa chamando a função hash() para obter o índice em que a palavra deve ser inserida.
+    Em seguida, ele verifica se a palavra já está presente na tabela verificando se o elemento no índice calculado não é nulo e se a palavra armazenada nesse elemento é a mesma da palavra a ser adicionada. Se a palavra já estiver presente, a função retorna sem adicionar a palavra à tabela.
+    A função então verifica se o número de entradas na tabela mais 1 é maior ou igual ao tamanho da tabela multiplicado pelo fator de carga. Se isso for verdade, significa que a tabela está ficando cheia e a função chama a função resize() para aumentar o tamanho da tabela.
+    Se o elemento no índice calculado for nulo, a função chama a função create() para criar um novo nó com a palavra e inserir no índice.
+    Se o elemento no índice calculado não for nulo e a palavra armazenada nesse elemento não for a mesma da palavra a ser adicionada, a função entra em um loop while. O loop while continua até encontrar um espaço vazio na tabela ou a palavra já estiver na tabela. Para encontrar o próximo espaço disponível, ele usa o sondagem linear. A sondagem linear é uma técnica de resolução de colisão onde o próximo espaço é encontrado incrementando o índice em 1 e tomando o resto quando dividido pelo tamanho da tabela.
+    Se um espaço vazio for encontrado, a função chama a função create() para criar um novo nó com a palavra e inserir no índice.
+
+Observe que essa implementação usa o endereçamento aberto como técnica de resolução de colisão, mais especificamente a sondagem linear.
 
     \subsubsection{get}
+    Esta função é utilizada para obter um nó específico dado uma palavra. Ela começa chamando a função hash para obter o índice onde a palavra deve ser encontrada. Se o elemento no índice calculado é nulo, a função retorna nullptr, indicando que a palavra não está presente. Se o elemento não é nulo, ele verifica se a palavra armazenada é a mesma da palavra que se deseja procurar. Se for, a função retorna o endereço desse elemento. Se não é a mesma, a função entra em um loop while e usa o sondagem linear para encontrar a palavra ou um espaço vazio. Se a palavra é encontrada, a função retorna o endereço desse elemento. Se não é encontrada, a função retorna nullptr.
 
     \subsubsection{add\_edge}
+    Esta função é utilizada para adicionar uma aresta entre dois nós na estrutura de dados que representa um grafo. Ela recebe dois argumentos, "from" e "to", que são ponteiros para os nós entre os quais a aresta será adicionada.
+
+    A função adiciona o nó "to" à lista de adjacência do nó "from" e o nó "from" à lista de adjacência do nó "to", estabelecendo assim a conexão entre eles.
+    A função incrementa o contador de arestas em ambos os nós, indicando que eles têm uma aresta adicional.
+    A função chama outra função chamada "g\_union" passando "from" e "to" como argumentos, essa função fará algo relacionado com a estrutura de dados union-find.
 
     \subsubsection{BFS}
+    A função BFS é uma implementação da busca em largura. Ela começa percorrendo todos os nós e marcando-os como não visitados e sem pais. Em seguida, a função adiciona o nó "from" a uma fila e marca-o como visitado. A função então entra em um loop enquanto a fila não estiver vazia. Dentro do loop, a função pega o primeiro elemento da fila e verifica se é o nó "to". Se for, a função retorna a profundidade atual. Caso contrário, a função percorre todos os nós adjacentes ao nó atual que ainda não foram visitados, marca-os como visitados e adiciona-os à fila. A profundidade é incrementada a cada iteração do loop. Se a profundidade atual é maior que o valor máximo de profundidade especificado e o valor máximo de profundidade é diferente de 0, a função retorna -1. Se o loop termina e o nó "to" ainda não foi encontrado, a função retorna -1.
 
     \subsubsection{DFS}
+    A função DFS é uma implementação da busca em profundidade. Ela funciona de maneira semelhante à função BFS, mas usa uma pilha em vez de uma fila. A função marca todos os nós como não visitados e sem pais e adiciona o nó "from" à pilha. A função então entra em um loop enquanto a pilha não estiver vazia. Dentro do loop, a função pega o topo da pilha e verifica se é o nó "to". Se for, a função segue o caminho de volta ao nó "from" contando a profundidade e retorna-a. Caso contrário, a função percorre todos os nós adjacentes ao nó atual que ainda não foram visitados, marca-os como visitados e adiciona-os à pilha. Se o loop termina e o nó "to" ainda não foi encontrado, a função retorna -1.
     
     \subsubsection{list\_connected\_components}
+    A função list\_connected\_components é usada para listar todos os nós que fazem parte do mesmo componente conectado de um nó específico dado uma palavra. Ela chama a função get() para obter o nó correspondente à palavra fornecida, se ele não for encontrado, a função imprime "Palavra não encontrada" e retorna. Caso contrário, ela chama outra função chamada "find", passando o nó encontrado como argumento, essa função retorna um representante de um conjunto na estrutura de dados union-find. Em seguida, a função percorre todos os nós na tabela hash e adiciona a um vetor de componentes todos os nós cujo representante é o mesmo do nó encontrado anteriormente. Finalmente, a função imprime "Pertencente ao mesmo componente conectado como [palavra fornecida]:" e imprime todas as palavras armazenadas nos nós do vetor de componentes.
     
     \subsubsection{find}
     
@@ -128,32 +154,37 @@ Como tal para resolver o problema proposto de criar um algoritmo em \emph{C/C++}
 
     \subsection{Estatísticas da Hash Table}\label{subsec:estatisticas-da-hash-table}
 
-    \subsubsection{get\_load\_factor}
-    
-    \subsubsection{get\_collisions}
+    \subsubsection{get\_load\_factor e get\_collisions}
+   As funções get\_load\_factor e get\_collisions são usadas para obter estatísticas sobre a tabela hash. A primeira função retorna o fator de carga atual, que é o número de entradas na tabela dividido pelo tamanho da tabela. A segunda função retorna o número de colisões na tabela, que é o número de entradas que estão em uma posição diferente daquela calculada pela função de hash.
     
     \subsubsection{get\_distribution}
-    
+    A função get\_distribution é usada para obter a distribuição de entradas na tabela hash. Ela percorre toda a tabela e adiciona "true" a um vetor se uma entrada está presente na posição atual ou "false" se não estiver. A função retorna esse vetor.
     
     \subsection{Estatísticas do Grafo}\label{subsec:estatisticas-do-grafo}
     
     \subsubsection{get\_connected\_components}
+    A função get\_connected\_components conta o número de componentes conectados no grafo. Ele percorre a tabela hash e verifica, para cada nó, se é um representante de seu conjunto de união (usando a propriedade representative). Se for, incrementa o contador de componentes. O número de componentes conectados é retornado no final.
     
     \subsubsection{get\_diameter}
+    A função get\_diameter calcula o diâmetro do grafo. O diâmetro é o caminho mais longo entre dois nós no grafo. Começa por percorrer a hash table e chama a função DFS em cada nó, passando o nó atual como início e o nó especificado como parâmetro como destino. A distância retornada pela DFS é comparada com a distância máxima encontrada até agora. Se for maior, atualiza a distância máxima e salva o nó inicial. No final, se print for verdadeiro, imprime o diâmetro e o caminho encontrado.
     
     \subsubsection{get\_diameter\_node}
+    A função get\_diameter\_node é semelhante à anterior, mas apenas retorna o nó inicial do caminho com o maior diâmetro.
     
 
     \subsection{Outras Funções}\label{subsec:outras-funcoes}
 
     \subsubsection{longest}
+    A função "longest" encontra o caminho mais longo entre uma palavra dada e todas as outras palavras na tabela de hash. Ela faz isso chamando o método get\_diameter() da tabela de hash correspondente ao tamanho da palavra dada.
     
     \subsubsection{connected}
+    A função "connected" verifica se as duas palavras dadas são conectadas (se elas diferem apenas por uma letra). Ela faz isso comparando cada letra das palavras uma a uma e verificando se elas são diferentes.
     
     \subsubsection{path\_finder}
+    A função "path\_finder" é usada para encontrar o caminho mais curto entre duas palavras no grafo. Ele usa a função BFS para encontrar a distância mais curta entre as duas palavras e imprime o caminho encontrado.
     
     \subsubsection{connected\_components}
-
+A função "connected\_components" encontra todas as palavras que estão conectadas (que diferem apenas por uma letra) à palavra dada. Ela faz isso chamando o método list\_connected\_components() da tabela de hash correspondente ao tamanho da palavra dada.
     
     \section{Resultados}\label{sec:resultados}
 
